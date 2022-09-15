@@ -1,9 +1,11 @@
+import java.nio.file.Files;
+import java.nio.file.Path;
+
 public class TaskDiv {
 
-        public static void main(String[] args) {
+        public static void main(String[] args)  {
 
-            Object[] array = {1,4,2,null,7,1};
-            getArray(array, 3);
+            readFile("dfvs");
         }
 
         public static Object getArray(Object[] arr, int i){
@@ -11,6 +13,17 @@ public class TaskDiv {
                 throw new ArrayNullException(i);
             }
             return arr[i];
+        }
+
+        public static boolean readFile(String filename) {
+            if (!Files.exists(Path.of(filename))){
+                try {
+                    throw new NoFileException(filename);
+                } catch (NoFileException e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+            return true;
         }
 
         public static int div(int a, int b) {
